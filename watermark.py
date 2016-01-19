@@ -1,5 +1,5 @@
-from PIL import Image, ImageDraw, ImageGrab, ImageFont
-import when, datetime
+from PIL import Image, ImageDraw, ImageFont
+import when
 import glob
 """YOU CAN CHANGE THESE"""
 #Nothing here oops
@@ -36,7 +36,6 @@ def tag_image(image, name, fill_color=(0,0,0,128), shadowcolor=(227,43,23,128)):
     scaler = 1.25
     year = str(when.today()).partition("-")[0]
     text = "%s %s %s" % (copyright_symbol, name, year)
-    time = str(datetime.datetime.now().time()).partition(".")[0].replace(":","`")
     while font.getsize(text)[0] < img_fraction*image.size[0]:
         # iterate until the text size is just larger than the criteria
         font_size += 1
