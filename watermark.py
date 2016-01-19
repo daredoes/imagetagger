@@ -2,6 +2,16 @@ from PIL import Image, ImageDraw, ImageFont
 import when
 import glob
 """YOU CAN CHANGE THESE"""
+#What percent of the width the copyright can take up.
+# Lower Number = Smaller Font
+# Upper Number = Bigger Font
+img_fraction = 0.90
+name = ""
+skip = 0
+opacity = 128
+fc = (0,0,0, opacity)
+sc = (255, 255, 255, opacity)
+
 #Nothing here oops
 """Nothing Below This"""
 watermark = Image.open("watermark.png")
@@ -30,7 +40,6 @@ def tag_image(image, name, fill_color=(0,0,0,128), shadowcolor=(227,43,23,128)):
     font_name = first_font()
     screen = image.convert("RGBA")
     font_size = 1
-    img_fraction = 0.90
     font = ImageFont.truetype(font_name, font_size)
     border_size = 5
     scaler = 1.25
@@ -84,24 +93,32 @@ options = ["Watermark Files", "Tag Files"]
 for y in range(len(options)):
     print("%d. %s" % (y+1, options[y]))
 inp = str(raw_input("Enter an option number: "))
-name = ""
-skip = 0
-opacity = 128
-fc = (0,0,0, opacity)
-sc = (255, 255, 255, opacity)
+
 
 if "1" in inp:
-    skip = int(raw_input("Skip Count (Ex. 1, 2, 3): "))
+    print("X being a watermark and O being a clear space...")
+    print("Skip 2 would be OOXOOXOOXOOX, skip 5 would be OOOOOXOOOOOXOOOOOXOOOOOX")
+    skip = int(raw_input("Skip Count (Ex. 0, 1, 2, 3): "))
 elif "2" in inp:
     name = str(raw_input("Name of Owner: "))
     print("LEAVE FOLLOWING BLANK FOR DEFAULT")
     try:
+        img_fraction = float(raw_input("Width of Tag (0-100): "))/100
+    except:
+        img_fraction = 0.5
+    try:
         opacity = int(raw_input("Opacity (0-255): "))
-    except ValueError:
+    except:
         opacity = 128
     print("Color (0-255) Example: '23, 43, 27'")
-    fc = (int(raw_input("Red Fill Color: ")), int(raw_input("Green Fill Color: ")), int(raw_input("Blue Fill Color: ")), opacity)
-    sc = (int(raw_input("Red Stroke Color: ")), int(raw_input("Green Stroke Color: ")), int(raw_input("Blue Stroke Color: ")), opacity)
+    try:
+        fc = (int(raw_input("Red Fill Color: ")), int(raw_input("Green Fill Color: ")), int(raw_input("Blue Fill Color: ")), opacity)
+    except:
+        fc = (0,0,0, opacity)
+    try:
+        sc = (int(raw_input("Red Stroke Color: ")), int(raw_input("Green Stroke Color: ")), int(raw_input("Blue Stroke Color: ")), opacity)
+    except:
+        sc = (255, 255, 255, opacity)
 
 for x in filetypes:
     if "1" in inp:

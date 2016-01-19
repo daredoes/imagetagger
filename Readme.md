@@ -17,3 +17,11 @@ Required Libraries:
 PIL or Pillow 'pip install pillow'
 
 when.py 'pip install whenpy'
+
+Note:
+
+I forgot to mention skip. Skip means every other X spaces place a watermark.
+
+X being a watermark and O being a clear space...
+
+Skip 2 would be OOXOOXOOXOOX, skip 5 would be OOOOOXOOOOOXOOOOOXOOOOOX, etc...
